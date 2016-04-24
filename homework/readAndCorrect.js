@@ -131,11 +131,16 @@ statisticStream.write(
     'Histogram for the amount of exemplars per title:\n' + JSON.stringify(getExemplarsForKey('PPN'), 0, 2)
 
 );
-
+statisticStream.close();
 
 //var util = require('util');
 //resultStream.write(util.inspect(array, false, null));
-resultStream.close();
+//resultStream.close();
+
+//Create file with all unique PPNs
+var ppnFile = fs.createWriteStream('ppn.txt');
+ppnFile.write(JSON.stringify(getUniqueValues('PPN'), 0 , 2));
+//ppnFile.close();
 
 
 console.log('\n\t' + allEntries + " corrected objects written to result.txt.");
